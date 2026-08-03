@@ -128,7 +128,7 @@ def deduplicate(items, threshold=0.6):
 def collect_all(sources=None, count=30, dedup=True):
     if sources is None: sources = list(ALL_SOURCES.keys())
     all_items = []
-    with ThreadPoolExecutor(max_workers=len(sources)) as pool:
+    with ThreadPoolExecutor(max_workers=min(4, len(sources))) as pool:
         futures = {pool.submit(_retry(ALL_SOURCES[name]), count): name for name in sources if name in ALL_SOURCES}
         for f in as_completed(futures):
             name = futures[f]
