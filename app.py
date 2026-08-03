@@ -4,7 +4,7 @@ Sentry — 舆情监测智能平台
 import streamlit as st
 import json, os, re, requests
 import pandas as pd
-# plotly 有 numpy 2.0 兼容问题，用 Streamlit 原生图表
+import plotly.graph_objects as go
 from datetime import datetime
 from collections import Counter, defaultdict
 
@@ -403,15 +403,58 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs(["数据总览", "热点洞察", "公平�
 
 with tab1:
     c1, c2 = st.columns(2)
+
     with c1:
-        st.markdown('<p style="font-size:15px;font-weight:600;color:#1a1d2e;margin-bottom:12px;">情感分布</p>', unsafe_allow_html=True)
-        df_sent = pd.DataFrame({"类型":["积极","中性","消极"],"数量":[sl.get("积极",0),sl.get("中性",0),sl.get("消极",0)]})
-        st.bar_chart(df_sent.set_index("类型"), use_container_width=True)
+        st.markdown('<p style="font-size:15px;font-weight:600;color:#1a1d2e;margin-bottom:4px;">情感分布</p>', unsafe_allow_html=True)
+        pos_n, neu_n, neg_n = sl.get("积极",0), sl.get("中性",0), sl.get("消极",0)
+        fig1 = go.Figure(go.Pie(
+            labels=["积极","中性","消极"], values=[pos_n, neu_n, neg_n],
+            hole=0.65,
+            marker_colors=["#10b981","#8b8fa3","#ef4444"],
+            textinfo='percent', textfont_size=13,
+            sort=False
+        ))
+        fig1.update_layout(
+            margin=dict(l=0,r=0,t=10,b=10), height=300,
+            paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+            showlegend=True, legend=dict(orientation="h", y=-0.1, x=0.5, xanchor="center"),
+            annotations=[dict(text=f"<b>{total}</b>", x=0.5, y=0.5, font_size=24, showarrow=False)]
+        )
+        st.plotly_chart(fig1, use_container_width=True, config={"displayModeBar": False})
 
     with c2:
-        st.markdown('<p style="font-size:15px;font-weight:600;color:#1a1d2e;margin-bottom:12px;">来源分布</p>', unsafe_allow_html=True)
-        df_src = pd.DataFrame({"来源":list(srcs_count.keys()),"数量":list(srcs_count.values())})
-        st.bar_chart(df_src.set_index("来源"), horizontal=True, use_container_width=True)
+        st.markdown('<p style="font-size:15px;font-weight:600;color:#1a1d2e;margin-bottom:4px;">来源分布</p>', unsafe_allow_html=True)
+        src_names = list(srcs_count.keys())
+        src_vals = list(srcs_count.values())
+        fig2 = go.Figure(go.Bar(
+            x=src_vals, y=src_names, orientation='h',
+            marker_color="#6366f1", marker_cornerradius=6,
+            text=src_vals, textposition="outside", textfont_size=12
+        ))
+        fig2.update_layout(
+            margin=dict(l=0,r=40,t=10,b=10), height=300,
+            paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+            xaxis_visible=False, yaxis=dict(tickfont_size=12)
+        )
+        st.plotly_chart(fig2, use_container_width=True, config={"displayModeBar": False})
+
+    # 来源统计表
+    st.markdown('<p style="font-size:15px;font-weight:600;color:#1a1d2e;margin:20px 0 8px;">各来源情感明细</p>', unsafe_allow_html=True)
+    sum_rows = []
+    for s in src_names:
+        src_items = [i for i in data if i["source"] == s]
+        if src_items:
+            sc = Counter(i["sentiment"]["label"] for i in src_items)
+            sum_rows.append({
+                "来源": s, "数量": len(src_items),
+                "积极": sc.get("积极",0), "中性": sc.get("中性",0), "消极": sc.get("消极",0),
+                "正面率": f"{sc.get('积极',0)/len(src_items)*100:.0f}%"
+            })
+    if sum_rows:
+        st.dataframe(pd.DataFrame(sum_rows), use_container_width=True, hide_index=True,
+                     column_config={
+                         "正面率": st.column_config.ProgressColumn("正面率", min_value=0, max_value=100, format="%s", width="small")
+                     })
 
 # ============================================================
 #  Tab 2: Hotspot
@@ -420,9 +463,20 @@ with tab1:
 with tab2:
     c1, c2 = st.columns([1, 1.4])
     with c1:
-        st.markdown('<p style="font-size:15px;font-weight:600;color:#1a1d2e;margin-bottom:12px;">热点关键词 Top 10</p>', unsafe_allow_html=True)
-        kw_df = pd.DataFrame({"关键词":[h["keyword"] for h in hotspots[:10]],"热度":[h["count"] for h in hotspots[:10]]})
-        st.bar_chart(kw_df.set_index("关键词"), horizontal=True, use_container_width=True)
+        st.markdown('<p style="font-size:15px;font-weight:600;color:#1a1d2e;margin-bottom:4px;">热点关键词 Top 10</p>', unsafe_allow_html=True)
+        kw_names = [h["keyword"] for h in hotspots[:10]][::-1]
+        kw_vals = [h["count"] for h in hotspots[:10]][::-1]
+        fig3 = go.Figure(go.Bar(
+            x=kw_vals, y=kw_names, orientation='h',
+            marker_color="#6366f1", marker_cornerradius=6,
+            text=kw_vals, textposition="outside", textfont_size=12
+        ))
+        fig3.update_layout(
+            margin=dict(l=0,r=40,t=10,b=10), height=350,
+            paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+            xaxis_visible=False, yaxis=dict(tickfont_size=12)
+        )
+        st.plotly_chart(fig3, use_container_width=True, config={"displayModeBar": False})
 
     with c2:
         st.markdown('<p style="font-size:15px;font-weight:600;color:#1a1d2e;margin-bottom:12px;">热点事件</p>', unsafe_allow_html=True)
