@@ -21,90 +21,37 @@ HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0
 
 st.markdown("""
 <style>
-* { font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif; }
-
-/* root */
-[data-testid="stAppViewContainer"] { background: #f0f2f6; }
+* { font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", "PingFang SC", sans-serif; }
+[data-testid="stAppViewContainer"] { background: #0f1117; }
 [data-testid="stHeader"] { background: transparent; }
-
-/* sidebar */
-[data-testid="stSidebar"] { background: linear-gradient(180deg, #1a1d2e 0%, #252840 100%); }
-[data-testid="stSidebar"] * { color: #d0d3e0 !important; }
-[data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 { color: white !important; }
+section.main { background: #0f1117; }
+.stMarkdown p, .stMarkdown li { color: #b0b5c6 !important; }
+h1, h2, h3, h4, h5 { color: #e0e2ea !important; }
+[data-testid="stSidebar"] { background: #0d0e15 !important; }
+[data-testid="stSidebar"] * { color: #8b8fa3 !important; }
 [data-testid="stSidebar"] button {
     background: linear-gradient(135deg, #6366f1, #8b5cf6) !important;
     border: none !important; color: white !important; border-radius: 10px !important;
-    font-weight: 500 !important; transition: 0.2s !important;
 }
-[data-testid="stSidebar"] button:hover { opacity: 0.9; transform: translateY(-1px); }
-[data-testid="stSidebar"] [data-baseweb="select"] > div { background: #2d3148 !important; border: 1px solid #3d4260 !important; }
-[data-testid="stSidebar"] input { background: #2d3148 !important; border: 1px solid #3d4260 !important; color: white !important; }
-[data-testid="stSidebar"] [data-testid="stMarkdown"] p { color: #8890a4 !important; }
-
-/* sidebar multiselect tags */
-[data-testid="stSidebar"] [data-baseweb="tag"] {
-    background: #4338ca !important; color: white !important;
-    border-radius: 6px !important; font-weight: 500 !important;
-    font-size: 12px !important; padding: 2px 8px !important;
-    height: auto !important; line-height: 1.4 !important;
-    white-space: nowrap !important; overflow: visible !important;
-}
-[data-testid="stSidebar"] [data-baseweb="tag"] span {
-    overflow: visible !important; text-overflow: clip !important;
-    max-width: none !important;
-}
-/* 修复 multiselect 输入框遮挡标签 */
-[data-testid="stSidebar"] [data-baseweb="select"] [role="listbox"] {
-    overflow: visible !important;
-}
-[data-testid="stSidebar"] [data-baseweb="select"] input {
-    min-width: 60px !important; width: auto !important;
-}
-
-/* fix white-on-white buttons in main area */
-div[data-testid="stButton"] > button {
-    border-radius: 10px; font-weight: 500; transition: 0.2s;
-    background: #6366f1; color: white; border: none;
-}
-div[data-testid="stButton"] > button:hover { background: #4f46e5; }
-
-/* fix multiselect/input in main area */
-[data-baseweb="select"] > div { border-color: #d0d5dd !important; }
-[data-baseweb="input"] { border-color: #d0d5dd !important; }
-
-/* block container cards */
-[data-testid="stVerticalBlock"] > div[style*="flex-direction: column"] > div {
-    background: white; border-radius: 14px;
-    padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06);
-    border: 1px solid #e8ecf1; margin-bottom: 16px;
-}
-[data-testid="stSidebar"] button:hover { opacity: 0.9; transform: translateY(-1px); }
-[data-testid="stSidebar"] [data-baseweb="select"] > div { background: #2d3148 !important; border: 1px solid #3d4260 !important; }
-[data-testid="stSidebar"] input { background: #2d3148 !important; border: 1px solid #3d4260 !important; color: white !important; }
-
-/* tabs */
-.stTabs [data-baseweb="tab-list"] { gap: 0; border-bottom: 2px solid #e8ecf1; }
-.stTabs [data-baseweb="tab"] {
-    border-radius: 0; padding: 12px 24px; font-weight: 500; color: #8890a4;
-    background: transparent; border: none; transition: 0.2s;
-}
-.stTabs [aria-selected="true"] {
-    color: #6366f1 !important;
-    border-bottom: 3px solid #6366f1 !important; margin-bottom: -2px;
-    font-weight: 600;
-}
-
-/* buttons */
-div[data-testid="stButton"] > button {
-    border-radius: 10px; font-weight: 500; transition: 0.2s;
-}
-
-/* dataframe */
-[data-testid="stDataFrame"] { border-radius: 12px; overflow: hidden; border: 1px solid #e8ecf1; }
-[data-testid="stDataFrame"] th { background: #f8f9fb !important; font-weight: 600 !important; color: #4a4f5c !important; }
-
-/* expander */
-[data-testid="stExpander"] { border: 1px solid #e8ecf1 !important; border-radius: 12px !important; }
+[data-testid="stSidebar"] input { background: #1a1d2e !important; border-color: #2d3148 !important; color: #d0d3e0 !important; }
+[data-testid="stSidebar"] [data-baseweb="select"] > div { background: #1a1d2e !important; border-color: #2d3148 !important; }
+div[data-testid="stButton"] > button { background: #6366f1; color: white; border: none; border-radius: 10px; font-weight: 500; }
+[data-baseweb="select"] > div { background: #1a1d2e !important; border-color: #2d3148 !important; color: #d0d3e0 !important; }
+[data-baseweb="input"] { background: #1a1d2e !important; border-color: #2d3148 !important; color: #d0d3e0 !important; }
+[data-testid="stNumberInput"] input { background: #1a1d2e !important; color: #d0d3e0 !important; border-color: #2d3148 !important; }
+.stTabs [data-baseweb="tab-list"] { border-bottom: 2px solid #1e2030; }
+.stTabs [data-baseweb="tab"] { padding: 12px 24px; font-weight: 500; color: #6b7280; background: transparent; }
+.stTabs [aria-selected="true"] { color: #818cf8 !important; border-bottom: 3px solid #818cf8 !important; }
+[data-testid="stDataFrame"] { border: 1px solid #1e2030 !important; }
+[data-testid="stDataFrame"] th { background: #1a1d2e !important; color: #8b8fa3 !important; }
+[data-testid="stDataFrame"] td { background: #14161f !important; color: #d0d3e0 !important; }
+[data-testid="stExpander"] { border: 1px solid #1e2030 !important; background: #14161f !important; }
+[data-testid="stMetric"] label { color: #8b8fa3 !important; }
+[data-testid="stMetricValue"] { color: #e0e2ea !important; }
+[data-testid="stAlert"] { background: #1a1d2e !important; border-color: #2d3148 !important; }
+.stCaption { color: #6b7280 !important; }
+[data-testid="stDownloadButton"] > button { background: #6366f1 !important; color: white !important; }
+[data-testid="stCheckbox"] label { color: #b0b5c6 !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -278,12 +225,12 @@ with st.sidebar:
         <div style="width:36px;height:36px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;color:white;"></div>
         <div>
             <div style="font-size:18px;font-weight:700;color:white !important;">Sentry</div>
-            <div style="font-size:11px;color:#8890a4;">舆情监测平台</div>
+            <div style="font-size:11px;color:#8b8fa3;">舆情监测平台</div>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown('<p style="font-size:11px;color:#8890a4;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">数据采集源</p>',unsafe_allow_html=True)
+    st.markdown('<p style="font-size:11px;color:#8b8fa3;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">数据采集源</p>',unsafe_allow_html=True)
     srcs = []
     for s in COLLECTORS.keys():
         if st.checkbox(s, value=s in st.session_state.fetch_sources, key=f"src_{s}"):
@@ -294,7 +241,7 @@ with st.sidebar:
 
     st.markdown('<div style="height:1px;background:#2d3148;margin:20px 0;"></div>', unsafe_allow_html=True)
 
-    st.markdown('<p style="font-size:11px;color:#8890a4;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">离线数据</p>',unsafe_allow_html=True)
+    st.markdown('<p style="font-size:11px;color:#8b8fa3;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">离线数据</p>',unsafe_allow_html=True)
     if st.button("加载本地数据 (raw.json)", use_container_width=True):
         p=os.path.join(DATA_DIR,"raw.json")
         if os.path.exists(p):
@@ -336,8 +283,8 @@ if not st.session_state.ready:
     st.markdown("""
     <div style="display:flex;align-items:center;justify-content:center;height:60vh;flex-direction:column;gap:16px;">
         <div style="font-size:48px;"></div>
-        <div style="font-size:22px;font-weight:600;color:#1a1d2e;">欢迎使用 Sentry</div>
-        <div style="color:#8890a4;font-size:14px;">请在左侧选择采集源并点击「开始采集数据」</div>
+        <div style="font-size:22px;font-weight:600;color:#e0e2ea;">欢迎使用 Sentry</div>
+        <div style="color:#8b8fa3;font-size:14px;">请在左侧选择采集源并点击「开始采集数据」</div>
     </div>
     """, unsafe_allow_html=True)
     st.stop()
@@ -355,10 +302,10 @@ c_title, c_report = st.columns([4, 1])
 with c_title:
     st.markdown(f"""
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
-        <div style="font-size:26px;font-weight:700;color:#1a1d2e;">舆情监测分析</div>
-        <div style="font-size:12px;color:#8890a4;background:#eef0f5;padding:3px 10px;border-radius:20px;">{datetime.now().strftime("%Y-%m-%d %H:%M")}</div>
+        <div style="font-size:26px;font-weight:700;color:#e0e2ea;">舆情监测分析</div>
+        <div style="font-size:12px;color:#8b8fa3;background:#1e2030;padding:3px 10px;border-radius:20px;">{datetime.now().strftime("%Y-%m-%d %H:%M")}</div>
     </div>
-    <div style="color:#8890a4;font-size:13px;margin-bottom:24px;">
+    <div style="color:#8b8fa3;font-size:13px;margin-bottom:24px;">
         {total} 条数据 · {len(srcs_count)} 个来源
     </div>
     """, unsafe_allow_html=True)
@@ -376,8 +323,8 @@ metrics_data = [
 kpi_html = '<div style="display:flex;gap:12px;margin-bottom:28px;">'
 for label, val in metrics_data:
     kpi_html += f"""
-    <div style="flex:1;background:white;border-radius:14px;padding:18px 20px;border:1px solid #eef0f5;box-shadow:0 1px 3px rgba(0,0,0,.02);">
-        <div style="font-size:12px;color:#8890a4;font-weight:500;margin-bottom:4px;">{label}</div>
+    <div style="flex:1;background:#14161f;border-radius:14px;padding:18px 20px;border:1px solid #1e2030;box-shadow:0 1px 3px rgba(0,0,0,.02);">
+        <div style="font-size:12px;color:#8b8fa3;font-weight:500;margin-bottom:4px;">{label}</div>
         <div style="font-size:30px;font-weight:700;color:{colors[label]};">{val}</div>
     </div>"""
 kpi_html += '</div>'
@@ -405,7 +352,7 @@ with tab1:
     c1, c2 = st.columns(2)
 
     with c1:
-        st.markdown('<p style="font-size:15px;font-weight:600;color:#1a1d2e;margin-bottom:4px;">情感分布</p>', unsafe_allow_html=True)
+        st.markdown('<p style="font-size:15px;font-weight:600;color:#e0e2ea;margin-bottom:4px;">情感分布</p>', unsafe_allow_html=True)
         pos_n, neu_n, neg_n = sl.get("积极",0), sl.get("中性",0), sl.get("消极",0)
         fig1 = go.Figure(go.Pie(
             labels=["积极","中性","消极"], values=[pos_n, neu_n, neg_n],
@@ -416,14 +363,14 @@ with tab1:
         ))
         fig1.update_layout(
             margin=dict(l=0,r=0,t=10,b=10), height=300,
-            paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+            paper_bgcolor="#14161f", plot_bgcolor="#14161f",
             showlegend=True, legend=dict(orientation="h", y=-0.1, x=0.5, xanchor="center"),
             annotations=[dict(text=f"<b>{total}</b>", x=0.5, y=0.5, font_size=24, showarrow=False)]
         )
         st.plotly_chart(fig1, use_container_width=True, config={"displayModeBar": False})
 
     with c2:
-        st.markdown('<p style="font-size:15px;font-weight:600;color:#1a1d2e;margin-bottom:4px;">来源分布</p>', unsafe_allow_html=True)
+        st.markdown('<p style="font-size:15px;font-weight:600;color:#e0e2ea;margin-bottom:4px;">来源分布</p>', unsafe_allow_html=True)
         src_names = list(srcs_count.keys())
         src_vals = list(srcs_count.values())
         fig2 = go.Figure(go.Bar(
@@ -433,13 +380,13 @@ with tab1:
         ))
         fig2.update_layout(
             margin=dict(l=0,r=40,t=10,b=10), height=300,
-            paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+            paper_bgcolor="#14161f", plot_bgcolor="#14161f",
             xaxis_visible=False, yaxis=dict(tickfont_size=12)
         )
         st.plotly_chart(fig2, use_container_width=True, config={"displayModeBar": False})
 
     # 来源统计表
-    st.markdown('<p style="font-size:15px;font-weight:600;color:#1a1d2e;margin:20px 0 8px;">各来源情感明细</p>', unsafe_allow_html=True)
+    st.markdown('<p style="font-size:15px;font-weight:600;color:#e0e2ea;margin:20px 0 8px;">各来源情感明细</p>', unsafe_allow_html=True)
     sum_rows = []
     for s in src_names:
         src_items = [i for i in data if i["source"] == s]
@@ -463,7 +410,7 @@ with tab1:
 with tab2:
     c1, c2 = st.columns([1, 1.4])
     with c1:
-        st.markdown('<p style="font-size:15px;font-weight:600;color:#1a1d2e;margin-bottom:4px;">热点关键词 Top 10</p>', unsafe_allow_html=True)
+        st.markdown('<p style="font-size:15px;font-weight:600;color:#e0e2ea;margin-bottom:4px;">热点关键词 Top 10</p>', unsafe_allow_html=True)
         kw_names = [h["keyword"] for h in hotspots[:10]][::-1]
         kw_vals = [h["count"] for h in hotspots[:10]][::-1]
         fig3 = go.Figure(go.Bar(
@@ -473,27 +420,27 @@ with tab2:
         ))
         fig3.update_layout(
             margin=dict(l=0,r=40,t=10,b=10), height=350,
-            paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+            paper_bgcolor="#14161f", plot_bgcolor="#14161f",
             xaxis_visible=False, yaxis=dict(tickfont_size=12)
         )
         st.plotly_chart(fig3, use_container_width=True, config={"displayModeBar": False})
 
     with c2:
-        st.markdown('<p style="font-size:15px;font-weight:600;color:#1a1d2e;margin-bottom:12px;">热点事件</p>', unsafe_allow_html=True)
+        st.markdown('<p style="font-size:15px;font-weight:600;color:#e0e2ea;margin-bottom:12px;">热点事件</p>', unsafe_allow_html=True)
         if events:
             for e in events:
                 st.markdown(f"""
-                <div style="background:white;border-radius:10px;padding:14px 16px;border:1px solid #eef0f5;margin-bottom:10px;">
-                    <div style="font-weight:600;color:#1a1d2e;margin-bottom:6px;">{e['name']}</div>
-                    <div style="font-size:12px;color:#8890a4;margin-bottom:8px;">共现 {e['co_occur']} 次</div>
-                    {''.join(f'<div style="font-size:12px;color:#6b7280;margin-bottom:2px;">- {a[:60]}</div>' for a in e['articles'][:3])}
+                <div style="background:#14161f;border-radius:10px;padding:14px 16px;border:1px solid #1e2030;margin-bottom:10px;">
+                    <div style="font-weight:600;color:#e0e2ea;margin-bottom:6px;">{e['name']}</div>
+                    <div style="font-size:12px;color:#8b8fa3;margin-bottom:8px;">共现 {e['co_occur']} 次</div>
+                    {''.join(f'<div style="font-size:12px;color:#8b8fa3;margin-bottom:2px;">- {a[:60]}</div>' for a in e['articles'][:3])}
                 </div>
                 """, unsafe_allow_html=True)
         else:
             st.info("暂未检测到显著热点事件")
 
     # 词云
-    st.markdown('<p style="font-size:15px;font-weight:600;color:#1a1d2e;margin-bottom:12px;">关键词词云</p>', unsafe_allow_html=True)
+    st.markdown('<p style="font-size:15px;font-weight:600;color:#e0e2ea;margin-bottom:12px;">关键词词云</p>', unsafe_allow_html=True)
     sizes = {h["keyword"]: h["count"] for h in hotspots[:20]}
     mx = max(sizes.values()) if sizes else 1
     html = []
@@ -501,27 +448,27 @@ with tab2:
         fs = max(13, int(13 + c/mx*34))
         op = max(0.35, c/mx)
         html.append(f'<span style="font-size:{fs}px;opacity:{op};padding:3px 6px;display:inline-block;color:#6366f1;font-weight:{600 if c>mx*0.6 else 400}">{w}</span>')
-    st.markdown(f'<div style="background:white;border-radius:12px;padding:20px;border:1px solid #eef0f5;line-height:2.4;text-align:center;">{" ".join(html)}</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="background:#14161f;border-radius:12px;padding:20px;border:1px solid #1e2030;line-height:2.4;text-align:center;">{" ".join(html)}</div>', unsafe_allow_html=True)
 
 # ============================================================
 #  Tab 3: Fairness
 # ============================================================
 
 with tab3:
-    st.markdown('<p style="font-size:15px;font-weight:600;color:#1a1d2e;margin-bottom:16px;">敏感属性分布</p>', unsafe_allow_html=True)
+    st.markdown('<p style="font-size:15px;font-weight:600;color:#e0e2ea;margin-bottom:16px;">敏感属性分布</p>', unsafe_allow_html=True)
     if attr_stats:
         cols = st.columns(len(attr_stats))
         for idx, (cat, info) in enumerate(attr_stats.items()):
             with cols[idx]:
                 st.markdown(f"""
-                <div style="background:white;border-radius:12px;padding:16px;border:1px solid #eef0f5;text-align:center;">
-                    <div style="font-size:12px;color:#8890a4;margin-bottom:4px;">{cat}</div>
+                <div style="background:#14161f;border-radius:12px;padding:16px;border:1px solid #1e2030;text-align:center;">
+                    <div style="font-size:12px;color:#8b8fa3;margin-bottom:4px;">{cat}</div>
                     <div style="font-size:28px;font-weight:700;color:#6366f1;">{info['total']}</div>
                     <div style="font-size:11px;color:#9ca3af;margin-top:6px;">{', '.join(f'{k}({v})' for k,v in info['top'][:3])}</div>
                 </div>
                 """, unsafe_allow_html=True)
 
-    st.markdown('<p style="font-size:15px;font-weight:600;color:#1a1d2e;margin:24px 0 12px;">群体公平性一览</p>', unsafe_allow_html=True)
+    st.markdown('<p style="font-size:15px;font-weight:600;color:#e0e2ea;margin:24px 0 12px;">群体公平性一览</p>', unsafe_allow_html=True)
     rows=[]
     for cat,info in attr_stats.items():
         for kw,cnt in info["top"][:5]:
@@ -573,7 +520,7 @@ with tab4:
 # ============================================================
 
 with tab5:
-    st.markdown('<p style="font-size:15px;font-weight:600;color:#1a1d2e;margin-bottom:12px;">舆情日报生成</p>', unsafe_allow_html=True)
+    st.markdown('<p style="font-size:15px;font-weight:600;color:#e0e2ea;margin-bottom:12px;">舆情日报生成</p>', unsafe_allow_html=True)
     today=datetime.now().strftime("%Y%m%d")
     report = f"# 舆情日报 {datetime.now().strftime('%Y-%m-%d')}\n\n"
     report += f"> {total} 条数据 · {', '.join(srcs_count.keys())}\n\n---\n\n"
@@ -606,7 +553,7 @@ with tab5:
 
 st.markdown("""
 <div style="margin-top:40px;padding-top:20px;border-top:1px solid #e8ecf1;display:flex;justify-content:space-between;align-items:center;">
-    <div style="color:#8890a4;font-size:12px;">Sentry · 舆情监测与热点分析智能平台</div>
-    <div style="color:#8890a4;font-size:12px;">课题 41 · 暑期实训大作业</div>
+    <div style="color:#8b8fa3;font-size:12px;">Sentry · 舆情监测与热点分析智能平台</div>
+    <div style="color:#8b8fa3;font-size:12px;">课题 41 · 暑期实训大作业</div>
 </div>
 """, unsafe_allow_html=True)
