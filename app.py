@@ -26,7 +26,7 @@ st.markdown("""
 * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
 
 /* root */
-[data-testid="stAppViewContainer"] { background: #f5f6fa; }
+[data-testid="stAppViewContainer"] { background: #f0f2f6; }
 [data-testid="stHeader"] { background: transparent; }
 
 /* sidebar */
@@ -37,6 +37,28 @@ st.markdown("""
     background: linear-gradient(135deg, #6366f1, #8b5cf6) !important;
     border: none !important; color: white !important; border-radius: 10px !important;
     font-weight: 500 !important; transition: 0.2s !important;
+}
+[data-testid="stSidebar"] button:hover { opacity: 0.9; transform: translateY(-1px); }
+[data-testid="stSidebar"] [data-baseweb="select"] > div { background: #2d3148 !important; border: 1px solid #3d4260 !important; }
+[data-testid="stSidebar"] input { background: #2d3148 !important; border: 1px solid #3d4260 !important; color: white !important; }
+[data-testid="stSidebar"] [data-testid="stMarkdown"] p { color: #8890a4 !important; }
+
+/* fix white-on-white buttons in main area */
+div[data-testid="stButton"] > button {
+    border-radius: 10px; font-weight: 500; transition: 0.2s;
+    background: #6366f1; color: white; border: none;
+}
+div[data-testid="stButton"] > button:hover { background: #4f46e5; }
+
+/* fix multiselect/input in main area */
+[data-baseweb="select"] > div { border-color: #d0d5dd !important; }
+[data-baseweb="input"] { border-color: #d0d5dd !important; }
+
+/* block container cards */
+[data-testid="stVerticalBlock"] > div[style*="flex-direction: column"] > div {
+    background: white; border-radius: 14px;
+    padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06);
+    border: 1px solid #e8ecf1; margin-bottom: 16px;
 }
 [data-testid="stSidebar"] button:hover { opacity: 0.9; transform: translateY(-1px); }
 [data-testid="stSidebar"] [data-baseweb="select"] > div { background: #2d3148 !important; border: 1px solid #3d4260 !important; }
