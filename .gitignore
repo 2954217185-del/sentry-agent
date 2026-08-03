@@ -1,0 +1,9 @@
+.env
+__pycache__/
+*.pyc
+data/raw.json
+collectors/data/raw.json
+demo/report_*.md
+*.zip
+.DS_Store
+Thumbs.db
