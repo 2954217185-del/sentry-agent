@@ -104,14 +104,22 @@ if not st.session_state.ready:
 
 @st.cache_data(ttl=600, show_spinner="分析中...")
 def cached_analysis(data_json):
-    items = json.loads(data_json)
-    items = batch_analyze(items)
-    hotspots, events = detect_hotspots(items)
-    attr_stats = detect_attrs(items)
-    predictions = predict_top_keywords(hotspots)
-    return items, hotspots, events, attr_stats, predictions
+    try:
+        items = json.loads(data_json)
+        items = batch_analyze(items)
+        hotspots, events = detect_hotspots(items)
+        attr_stats = detect_attrs(items)
+        predictions = predict_top_keywords(hotspots)
+        return items, hotspots, events, attr_stats, predictions
+    except Exception as e:
+        st.error(f"分析失败: {e}")
+        return json.loads(data_json), [], [], {}, []
 
-data, hotspots, events, attr_stats, predictions = cached_analysis(json.dumps(st.session_state.data, ensure_ascii=False))
+try:
+    data, hotspots, events, attr_stats, predictions = cached_analysis(json.dumps(st.session_state.data, ensure_ascii=False))
+except Exception as e:
+    st.warning(f"数据加载中，请稍候再试... ({e})")
+    st.stop()
 total = len(data)
 sl = Counter(i["sentiment"]["label"] for i in data)
 srcs_count = Counter(i["source"] for i in data)
