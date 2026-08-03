@@ -53,6 +53,13 @@ st.markdown("""
     overflow: visible !important; text-overflow: clip !important;
     max-width: none !important;
 }
+/* 修复 multiselect 输入框遮挡标签 */
+[data-testid="stSidebar"] [data-baseweb="select"] [role="listbox"] {
+    overflow: visible !important;
+}
+[data-testid="stSidebar"] [data-baseweb="select"] input {
+    min-width: 60px !important; width: auto !important;
+}
 
 /* fix white-on-white buttons in main area */
 div[data-testid="stButton"] > button {
@@ -277,7 +284,7 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
     st.markdown('<p style="font-size:11px;color:#8890a4;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">数据采集源</p>',unsafe_allow_html=True)
-    srcs = st.multiselect("", list(COLLECTORS.keys()), default=st.session_state.fetch_sources, label_visibility="collapsed")
+    srcs = st.multiselect("选择平台", list(COLLECTORS.keys()), default=st.session_state.fetch_sources, label_visibility="collapsed")
     n = st.number_input("每个来源采集条数", 10, 50, st.session_state.fetch_count, 10)
     do_fetch = st.button("开始采集数据", use_container_width=True)
 
