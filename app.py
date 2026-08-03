@@ -48,7 +48,7 @@ div[data-testid="stButton"] > button { background: #6366f1; color: white; border
 
 # ---- Session ----
 DEFAULT_SRC = list(ALL_SOURCES.keys())
-for k, v in {"data":[], "hotspots":[], "events":[], "attr_stats":{},"fetch_sources":DEFAULT_SRC,"fetch_count":20,"ready":False}.items():
+for k, v in {"data":[], "hotspots":[], "events":[], "attr_stats":{},"fetch_sources":DEFAULT_SRC,"fetch_count":50,"ready":False}.items():
     if k not in st.session_state: st.session_state[k] = v
 
 # ============================================================
@@ -62,7 +62,7 @@ with st.sidebar:
     for s in ALL_SOURCES:
         if st.checkbox(s, value=s in st.session_state.fetch_sources, key=f"src_{s}"): srcs.append(s)
     st.session_state.fetch_sources = srcs
-    n = st.number_input("每个来源采集条数", 10, 50, st.session_state.fetch_count, 10)
+    n = st.number_input("每个来源采集条数", 10, 100, st.session_state.fetch_count, 10)
     do_fetch = st.button("开始采集数据", use_container_width=True)
 
     st.markdown('<div style="height:1px;background:#2d3148;margin:20px 0;"></div>', unsafe_allow_html=True)
