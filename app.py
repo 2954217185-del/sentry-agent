@@ -284,7 +284,11 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
     st.markdown('<p style="font-size:11px;color:#8890a4;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">数据采集源</p>',unsafe_allow_html=True)
-    srcs = st.multiselect("选择平台", list(COLLECTORS.keys()), default=st.session_state.fetch_sources, label_visibility="collapsed")
+    srcs = []
+    for s in COLLECTORS.keys():
+        if st.checkbox(s, value=s in st.session_state.fetch_sources, key=f"src_{s}"):
+            srcs.append(s)
+    st.session_state.fetch_sources = srcs
     n = st.number_input("每个来源采集条数", 10, 50, st.session_state.fetch_count, 10)
     do_fetch = st.button("开始采集数据", use_container_width=True)
 
@@ -481,12 +485,20 @@ with tab3:
 # ============================================================
 
 with tab4:
-    sf = st.multiselect("来源", list(srcs_count.keys()), default=list(srcs_count.keys()), label_visibility="collapsed",
-                        placeholder="按来源筛选")
-    c_filt = st.columns(3)
-    ef = c_filt[0].multiselect("情感", ["积极","中性","消极"], default=["积极","中性","消极"], placeholder="按情感筛选")
-    kw = c_filt[1].text_input("", placeholder="搜索关键词...")
-    c_filt[2].caption(f'{" "}')
+    st.markdown("**按来源筛选**")
+    c1, c2, c3 = st.columns(3)
+    sf = []
+    for s in list(srcs_count.keys()):
+        if c1.checkbox(s, value=True, key=f"filt_src_{s}"):
+            sf.append(s)
+
+    st.markdown("**按情感筛选**")
+    ef = []
+    for e in ["积极", "中性", "消极"]:
+        if c2.checkbox(e, value=True, key=f"filt_emo_{e}"):
+            ef.append(e)
+
+    kw = c3.text_input("关键词搜索", placeholder="输入关键词...")
 
     filtered = [it for it in data if it["source"] in sf and it["sentiment"]["label"] in ef
                 and (not kw or kw in it["title"])]
