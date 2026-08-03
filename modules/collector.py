@@ -149,6 +149,12 @@ def load_local():
 
 def save_local(items):
     path = os.path.join(DATA_DIR, "raw.json")
+    safe_items = []
+    for it in items:
+        item = dict(it)
+        if isinstance(item.get("cross_sources"), set):
+            item["cross_sources"] = list(item["cross_sources"])
+        safe_items.append(item)
     with open(path, "w", encoding="utf-8") as f:
-        json.dump(items, f, ensure_ascii=False, indent=2)
+        json.dump(safe_items, f, ensure_ascii=False, indent=2)
     return path
