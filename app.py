@@ -47,6 +47,13 @@ st.markdown("""
 [data-testid="stSidebar"] [data-baseweb="tag"] {
     background: #4338ca !important; color: white !important;
     border-radius: 6px !important; font-weight: 500 !important;
+    font-size: 12px !important; padding: 2px 8px !important;
+    height: auto !important; line-height: 1.4 !important;
+    white-space: nowrap !important; overflow: visible !important;
+}
+[data-testid="stSidebar"] [data-baseweb="tag"] span {
+    overflow: visible !important; text-overflow: clip !important;
+    max-width: none !important;
 }
 
 /* fix white-on-white buttons in main area */
