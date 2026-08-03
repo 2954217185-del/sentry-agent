@@ -86,7 +86,14 @@ if do_fetch:
     with st.spinner("采集中..."):
         items = collect_all(sources=srcs, count=n)
     if items:
-        st.session_state.data = items; save_local(items)
+        # 清理不可序列化的类型
+        safe = []
+        for it in items:
+            d = dict(it)
+            if isinstance(d.get("cross_sources"), set):
+                d["cross_sources"] = list(d["cross_sources"])
+            safe.append(d)
+        st.session_state.data = safe; save_local(safe)
         st.session_state.ready = True; st.rerun()
     else: st.sidebar.error("全部采集失败")
 
