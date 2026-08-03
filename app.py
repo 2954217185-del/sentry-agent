@@ -21,9 +21,7 @@ HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0
 
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-* { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+* { font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif; }
 
 /* root */
 [data-testid="stAppViewContainer"] { background: #f0f2f6; }
