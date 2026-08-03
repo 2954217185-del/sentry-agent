@@ -362,7 +362,7 @@ with tab1:
     with c1:
         st.markdown('<p style="font-size:15px;font-weight:600;color:#1a1d2e;margin-bottom:12px;">情感分布</p>', unsafe_allow_html=True)
         df_sent = pd.DataFrame({"类型":["积极","中性","消极"],"数量":[sl.get("积极",0),sl.get("中性",0),sl.get("消极",0)]})
-        st.bar_chart(df_sent.set_index("类型"), use_container_width=True, color=["#10b981","#8b8fa3","#ef4444"])
+        st.bar_chart(df_sent.set_index("类型"), use_container_width=True)
 
     with c2:
         st.markdown('<p style="font-size:15px;font-weight:600;color:#1a1d2e;margin-bottom:12px;">来源分布</p>', unsafe_allow_html=True)
