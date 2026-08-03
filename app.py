@@ -43,6 +43,12 @@ st.markdown("""
 [data-testid="stSidebar"] input { background: #2d3148 !important; border: 1px solid #3d4260 !important; color: white !important; }
 [data-testid="stSidebar"] [data-testid="stMarkdown"] p { color: #8890a4 !important; }
 
+/* sidebar multiselect tags */
+[data-testid="stSidebar"] [data-baseweb="tag"] {
+    background: #4338ca !important; color: white !important;
+    border-radius: 6px !important; font-weight: 500 !important;
+}
+
 /* fix white-on-white buttons in main area */
 div[data-testid="stButton"] > button {
     border-radius: 10px; font-weight: 500; transition: 0.2s;
